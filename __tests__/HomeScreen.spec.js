@@ -8,4 +8,6 @@ describe('HomeScreen', () => {
     const {queryByText} = render(<HomeScreen />);
     expect(queryByText('Home Screen')).not.toBeNull();
   });
+
+  it.todo('allows navigating');
 });
