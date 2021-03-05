@@ -47,6 +47,6 @@ describe('HomeScreen', () => {
     const {findByText} = context;
     const element = await findByText(todo.title);
     fireEvent.press(element);
-    expect(navigation.navigate).toHaveBeenCalledWith('Details', {todo});
+    expect(navigation.navigate).toHaveBeenCalledWith('Details', {id: todo.id});
   });
 });

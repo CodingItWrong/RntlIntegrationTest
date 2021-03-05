@@ -19,7 +19,7 @@ export default function HomeScreen({navigation}) {
         <Button
           key={todo.id}
           title={todo.title}
-          onPress={() => navigation.navigate('Details', {todo})}
+          onPress={() => navigation.navigate('Details', {id: todo.id})}
         />
       ))}
     </View>
