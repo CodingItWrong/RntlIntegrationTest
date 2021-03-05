@@ -9,7 +9,8 @@ export default function DetailsScreen({route}) {
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Todo: {todo.title}</Text>
+      <Text>Todo:</Text>
+      <Text>{todo.title}</Text>
     </View>
   );
 }
