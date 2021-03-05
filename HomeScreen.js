@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, Text, View} from 'react-native';
-import axios from 'axios';
+import {loadTodos} from './store/todos/actions';
+import {selectTodos} from './store/todos/selectors';
 
 export default function HomeScreen({navigation}) {
-  const [todos, setTodos] = useState([]);
+  const dispatch = useDispatch();
+  const todos = useSelector(selectTodos);
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos')
-      .then((response) => setTodos(response.data));
-  }, []);
+    dispatch(loadTodos());
+  }, [dispatch]);
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
