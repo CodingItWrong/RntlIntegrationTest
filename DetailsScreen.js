@@ -1,10 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-export default function DetailsScreen() {
+export default function DetailsScreen({route}) {
+  const {todo} = route.params;
+  console.log({todo});
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
+      <Text>Todo: {todo.title}</Text>
     </View>
   );
 }
