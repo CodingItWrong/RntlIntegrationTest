@@ -1,7 +1,9 @@
 import 'react-native';
 import React from 'react';
+import {Provider} from 'react-redux';
 import {render, fireEvent} from '@testing-library/react-native';
 import HomeScreen from '../HomeScreen';
+import {createStore} from '../store';
 import moxios from 'moxios';
 
 describe('HomeScreen', () => {
@@ -21,7 +23,14 @@ describe('HomeScreen', () => {
     navigation = {
       navigate: jest.fn().mockName('navigation.navigate'),
     };
-    context = render(<HomeScreen navigation={navigation} />);
+
+    const store = createStore();
+
+    context = render(
+      <Provider store={store}>
+        <HomeScreen navigation={navigation} />
+      </Provider>,
+    );
   });
 
   afterEach(function () {
