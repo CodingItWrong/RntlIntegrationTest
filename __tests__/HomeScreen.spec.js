@@ -2,19 +2,42 @@ import 'react-native';
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import HomeScreen from '../HomeScreen';
+import moxios from 'moxios';
 
 describe('HomeScreen', () => {
-  it('renders a hello message', () => {
-    const {queryByText} = render(<HomeScreen />);
-    expect(queryByText('Home Screen')).not.toBeNull();
-  });
+  const todo = {id: 1, title: 'My Todo'};
 
-  it('allows navigating', () => {
-    const navigation = {
+  let context;
+  let navigation;
+
+  beforeEach(function () {
+    moxios.install();
+
+    moxios.stubRequest('https://jsonplaceholder.typicode.com/todos', {
+      status: 200,
+      response: [todo],
+    });
+
+    navigation = {
       navigate: jest.fn().mockName('navigation.navigate'),
     };
-    const {getByText} = render(<HomeScreen navigation={navigation} />);
-    fireEvent.press(getByText('Go to Details'));
-    expect(navigation.navigate).toHaveBeenCalled();
+    context = render(<HomeScreen navigation={navigation} />);
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
+
+  it('renders todos from service', async () => {
+    const {findByText} = context;
+    const element = await findByText(todo.title);
+    expect(element).not.toBeNull();
+  });
+
+  it('allows navigating', async () => {
+    const {findByText} = context;
+    const element = await findByText(todo.title);
+    fireEvent.press(element);
+    expect(navigation.navigate).toHaveBeenCalledWith('Details', {todo});
   });
 });
