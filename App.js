@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createStore} from './store';
-import {NativeProvider} from './native';
+import {NativeServiceProvider} from './services/native';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 
@@ -16,12 +16,12 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <NativeProvider>
+        <NativeServiceProvider>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Details" component={DetailsScreen} />
           </Stack.Navigator>
-        </NativeProvider>
+        </NativeServiceProvider>
       </NavigationContainer>
     </Provider>
   );

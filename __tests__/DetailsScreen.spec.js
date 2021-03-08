@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {render, fireEvent} from '@testing-library/react-native';
 import DetailsScreen from '../DetailsScreen';
 import {createStore} from '../store';
-import {NativeProvider} from '../native';
+import {ServiceProvider} from '../services';
 
 describe('DetailsScreen', () => {
   const todo = {id: 1, title: 'My Todo'};
@@ -26,9 +26,9 @@ describe('DetailsScreen', () => {
 
     context = render(
       <Provider store={store}>
-        <NativeProvider services={services}>
+        <ServiceProvider services={services}>
           <DetailsScreen route={route} />
-        </NativeProvider>
+        </ServiceProvider>
       </Provider>,
     );
   });

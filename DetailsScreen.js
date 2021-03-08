@@ -2,10 +2,10 @@ import React from 'react';
 import {Button, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectTodo} from './store/todos/selectors';
-import {useNative} from './native';
+import {useServices} from './services';
 
 export default function DetailsScreen({route}) {
-  const {alert} = useNative();
+  const {alert} = useServices();
   const {id} = route.params;
   const todo = useSelector(selectTodo(id));
 
